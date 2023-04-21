@@ -410,6 +410,7 @@ getMatrixFromProject <- function(
 #'
 #' @param ArrowFile The path to an ArrowFile from which the selected data matrix should be obtained.
 #' @param useMatrix The name of the data matrix to retrieve from the given ArrowFile. Options include "TileMatrix", "GeneScoreMatrix", etc.
+#' @param excludeChr A character vector containing the `seqnames` of the chromosomes that should be excluded from this analysis.
 #' @param useSeqnames A character vector of chromosome names to be used to subset the data matrix being obtained.
 #' @param excludeChr A character vector containing the `seqnames` of the chromosomes that should be excluded from this analysis.
 #' @param cellNames A character vector indicating the cell names of a subset of cells from which fragments whould be extracted.
@@ -465,6 +466,9 @@ getMatrixFromArrow <- function(
 
   if(!is.null(useSeqnames)){
     seqnames <- seqnames[seqnames %in% useSeqnames]
+  }
+  if(!is.null(excludeChr)) {
+    seqnames <- seqnames[seqnames %ni% excludeChr]
   }
 
   if(!is.null(excludeChr)){
@@ -806,7 +810,6 @@ getMatrixFromArrow <- function(
     seqnames <- seqnames[which(seqnames %ni% excludeSeqnames)]
     featureDF <- featureDF[BiocGenerics::which(paste0(featureDF$seqnames) %bcni% excludeSeqnames),,drop=FALSE]
   }
-
   rownames(featureDF) <- paste0("f", seq_len(nrow(featureDF)))
   cellNames <- unlist(groupList, use.names = FALSE) ### UNIQUE here? doublet check QQQ
 

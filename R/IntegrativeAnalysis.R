@@ -1082,6 +1082,7 @@ addPeak2GeneLinks <- function(
   .validInput(input = dimsToUse, name = "dimsToUse", valid = c("numeric", "null"))
   .validInput(input = scaleDims, name = "scaleDims", valid = c("boolean", "null"))
   .validInput(input = corCutOff, name = "corCutOff", valid = c("numeric", "null"))
+  .validInput(input = excludeChr, name = "excludeChr", valid = c("character", "null"))
   .validInput(input = cellsToUse, name = "cellsToUse", valid = c("character", "null"))
   .validInput(input = excludeChr, name = "excludeChr", valid = c("character", "null"))
   .validInput(input = k, name = "k", valid = c("integer"))
@@ -1199,7 +1200,9 @@ addPeak2GeneLinks <- function(
   .logDiffTime(main="Getting Group RNA Matrix", t1=tstart, verbose=verbose, logFile=logFile)
   groupMatRNA <- .getGroupMatrix(
     ArrowFiles = getArrowFiles(ArchRProj), 
-    featureDF = geneDF, 
+    featureDF = geneDF,
+    groupList = knnObj,
+    excludeSeqnames = excludeChr,
     groupList = knnObj, 
     excludeSeqnames = excludeChr,
     useMatrix = useMatrix,
@@ -1213,7 +1216,9 @@ addPeak2GeneLinks <- function(
   .logDiffTime(main="Getting Group ATAC Matrix", t1=tstart, verbose=verbose, logFile=logFile)
   groupMatATAC <- .getGroupMatrix(
     ArrowFiles = getArrowFiles(ArchRProj), 
-    featureDF = peakDF, 
+    featureDF = peakDF,
+    groupList = knnObj,
+    excludeSeqnames = excludeChr,
     groupList = knnObj, 
     excludeSeqnames = excludeChr,
     useMatrix = "PeakMatrix",
