@@ -1058,7 +1058,6 @@ addPeak2GeneLinks <- function(
   dimsToUse = 1:30,
   scaleDims = NULL,
   corCutOff = 0.75,
-  excludeChr = c(),
   cellsToUse = NULL,
   excludeChr = NULL,
   k = 100, 
