@@ -1745,7 +1745,8 @@ plotBrowserTrack <- function(
         ylab("") + 
         coord_cartesian(ylim = c(-100,0)) +
         scale_x_continuous(limits = c(start(region), end(region)), expand = c(0,0)) +
-        scale_color_gradientn(colors = pal, limits = c(valueMin, valueMax), fill=guide_legend(title="New Legend Title")) +
+        scale_color_gradientn(colors = pal, limits = c(valueMin, valueMax)) +
+        labs(color="NEW LEGEND TITLE") +
         theme(legend.text = element_text(size = baseSize)) +
         theme_ArchR(baseSize = baseSize, baseLineSize = borderWidth, baseRectSize = borderWidth, legendTextSize = baseSize, legendPosition = "right") +
         theme(strip.text.y = element_text(size = facetbaseSize, angle = 0), strip.background = element_blank(),
