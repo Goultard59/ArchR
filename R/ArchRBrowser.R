@@ -961,6 +961,7 @@ plotBrowserTrack <- function(
       plotList$genetrack <- .geneTracks(
         geneAnnotation = geneAnnotation, 
         region = region[x], 
+        baseSize = featurefontSize,
         facetbaseSize = facetbaseSize,
         title = "Genes",
         highlight = highlight,
@@ -1371,7 +1372,7 @@ plotBrowserTrack <- function(
 .geneTracks <- function(
   geneAnnotation = NULL, 
   region = NULL, 
-  baseSize = 9, 
+  baseSize = NULL, 
   borderWidth = 0.4, 
   title = "Genes",
   geneWidth = 2, 
@@ -2140,10 +2141,3 @@ plotBrowserTrack <- function(
   p
 
 }
-
-
-
-
-
-
-
