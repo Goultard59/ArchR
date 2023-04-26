@@ -708,7 +708,7 @@ ArchRBrowserTrack <- function(...){
 #' @param ylim The numeric quantile y-axis limit to be used for for "bulkTrack" plotting. This should be expressed as `c(lower limit, upper limit)` such as `c(0,0.99)`. If not provided, the y-axis limit will be c(0, 0.999).
 #' @param pal A custom palette (see `paletteDiscrete` or `ArchRPalettes`) used to override coloring for groups.
 #' @param baseSize The numeric font size to be used in the plot. This applies to all plot labels.
-#' @param featurefontSize The numeric font size to be used in the featureTrack.
+#' @param featurefontSize The numeric font size to be used for gene label in the geneTrack.
 #' @param loopfontSize The numeric font size to be used in the loopTrack.
 #' @param scTileSize The width of the tiles in scTracks. Larger numbers may make cells overlap more. Default is 0.5 for about 100 cells.
 #' @param scCellsMax The maximum number of cells for scTracks.
@@ -761,7 +761,7 @@ plotBrowserTrack <- function(
   ylim = NULL,
   pal = NULL,
   baseSize = 7,
-  featurefontSize = 9,
+  featurefontSize = 2,
   loopfontSize = 9,
   looplegendtitle = "value",
   scTileSize = 0.5,
@@ -925,7 +925,7 @@ plotBrowserTrack <- function(
         plotList$featuretrack <- .featureTracks(
             features = features, 
             region = region[x], 
-            baseSize = featurefontSize,
+            baseSize = baseSize,
             facetbaseSize = facetbaseSize,
             hideX = TRUE, 
             title = "Peaks",
@@ -964,7 +964,7 @@ plotBrowserTrack <- function(
       plotList$genetrack <- .geneTracks(
         geneAnnotation = geneAnnotation, 
         region = region[x], 
-        baseSize = featurefontSize,
+        labelSize = featurefontSize,
         facetbaseSize = facetbaseSize,
         title = "Genes",
         highlight = highlight,
@@ -1375,12 +1375,12 @@ plotBrowserTrack <- function(
 .geneTracks <- function(
   geneAnnotation = NULL, 
   region = NULL, 
-  baseSize = NULL, 
+  baseSize = 9, 
   borderWidth = 0.4, 
   title = "Genes",
   geneWidth = 2, 
   exonWidth = 4, 
-  labelSize = 12,
+  labelSize = NULL,
   facetbaseSize,
   colorMinus = "dodgerblue2",
   colorPlus = "red",
