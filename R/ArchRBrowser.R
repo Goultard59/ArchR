@@ -763,6 +763,7 @@ plotBrowserTrack <- function(
   baseSize = 7,
   featurefontSize = 9,
   loopfontSize = 9,
+  looplegendtitle = "value",
   scTileSize = 0.5,
   scCellsMax = 100,
   borderWidth = 0.4,
@@ -800,6 +801,7 @@ plotBrowserTrack <- function(
   .validInput(input = baseSize, name = "baseSize", valid = "numeric")
   .validInput(input = featurefontSize, name = "featurefontSize", valid = "numeric")
   .validInput(input = loopfontSize, name = "loopfontSize", valid = "numeric")
+  .validInput(input = looplegendtitle, name = "looplegendtitle", valid = "character")
   .validInput(input = scTileSize, name = "scTileSize", valid = "numeric")
   .validInput(input = scCellsMax, name = "scCellsMax", valid = "integer")
   .validInput(input = borderWidth, name = "borderWidth", valid = "numeric")
@@ -944,6 +946,7 @@ plotBrowserTrack <- function(
             region = region[x], 
             baseSize = loopfontSize,
             facetbaseSize = facetbaseSize,
+            looplegendtitle = looplegendtitle,
             hideX = TRUE, 
             hideY = TRUE,
             title = "Loops",
@@ -1463,7 +1466,7 @@ plotBrowserTrack <- function(
       theme(legend.text = element_text(size = baseSize), strip.text.y = element_text(size = facetbaseSize, angle = 0)) +
       .gg_guides(fill = guide_legend(override.aes = list(colour = NA, shape = "c", size=3)), color = FALSE) + 
       theme(legend.position="bottom") +
-      theme(legend.title=element_text(size=5), legend.text=element_text(size=7),
+      theme(legend.title=element_text(size=baseSize), legend.text=element_text(size=baseSize),
         legend.key.size = unit(0.75,"line"), legend.background = element_rect(color =NA), strip.background = element_blank())
 
     #Add Labels if There are Genes with this orientation!
@@ -1671,6 +1674,7 @@ plotBrowserTrack <- function(
   pal = NULL,
   baseSize = NULL, 
   facetbaseSize = 9,
+  looplegendtitle = NULL,
   featureWidth = 2, 
   borderWidth = 0.4, 
   hideX = FALSE, 
@@ -1746,11 +1750,11 @@ plotBrowserTrack <- function(
         coord_cartesian(ylim = c(-100,0)) +
         scale_x_continuous(limits = c(start(region), end(region)), expand = c(0,0)) +
         scale_color_gradientn(colors = pal, limits = c(valueMin, valueMax)) +
-        labs(color="NEW LEGEND TITLE") +
+        labs(color=looplegendtitle) +
         theme(legend.text = element_text(size = baseSize)) +
         theme_ArchR(baseSize = baseSize, baseLineSize = borderWidth, baseRectSize = borderWidth, legendTextSize = baseSize, legendPosition = "right") +
         theme(strip.text.y = element_text(size = facetbaseSize, angle = 0), strip.background = element_blank(),
-          legend.box.background = element_rect(color = NA)) +
+          legend.box.background = element_rect(color = NA), legend.key.height= unit(4, 'cm')) +
         .gg_guides(color= guide_colorbar(barwidth = 0.75, barheight = 3))
 
     }else{
