@@ -1380,7 +1380,7 @@ plotBrowserTrack <- function(
   title = "Genes",
   geneWidth = 2, 
   exonWidth = 4, 
-  labelSize = 2,
+  labelSize = 12,
   facetbaseSize,
   colorMinus = "dodgerblue2",
   colorPlus = "red",
@@ -1754,8 +1754,8 @@ plotBrowserTrack <- function(
         theme(legend.text = element_text(size = baseSize)) +
         theme_ArchR(baseSize = baseSize, baseLineSize = borderWidth, baseRectSize = borderWidth, legendTextSize = baseSize, legendPosition = "right") +
         theme(strip.text.y = element_text(size = facetbaseSize, angle = 0), strip.background = element_blank(),
-          legend.box.background = element_rect(color = NA), legend.key.height= unit(4, 'cm')) +
-        .gg_guides(color= guide_colorbar(barwidth = 0.75, barheight = 3))
+          legend.box.background = element_rect(color = NA)) +
+        .gg_guides(color= guide_colorbar(barwidth = 0.75, barheight = 6))
 
     }else{
 
